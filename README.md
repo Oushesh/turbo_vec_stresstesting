@@ -31,6 +31,15 @@
 
    how does turboquant compare to HNWSW and IV Flat Index??
    <Compare and Contrast those studies here and see what happens>
+
+## Implementation Guidelines
+   Before writing the code, keep the geometric pipeline in mind: 
+   [Input Vector x] ──> [Extract L2 Norm] ──> [Unit Vector x_hat] ──> [Apply Random     Rotation (Hadamard/Dense)] ──> [Scalar Lloyd-Max Binning]
    
-      
+## The Architecture of Stage 1:
+   1. Extract the Magnitude (L2 Norm): We pull out the absolute scale of the vector and save it as a high-precision float (f16 or f32). This means the remaining vector has a norm of exactly 1.0.
+
+   2. Random Rotation (II): Multiplying our unit vector by a random orthogonal matrix distributed over the hypersphere smashes any outlier spikes. The individual coordinates flatten out into a highly predictable, conventrated Beta Distribution (which behaves identically to a standard Gaussian in high dimensions).
+
+   3. Lloyd-Max Scalar Quantization: Because the distribution of coordinates is now fixed and independent, we map each coordinate to its closest centroid in a pre-computed Lloyd-Max codebook.
    

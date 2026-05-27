@@ -43,3 +43,6 @@
 
    3. Lloyd-Max Scalar Quantization: Because the distribution of coordinates is now fixed and independent, we map each coordinate to its closest centroid in a pre-computed Lloyd-Max codebook.
    
+
+## Add a page for subvector and strategy Product Quantisation 
+    Links and implementation for product quantisation
